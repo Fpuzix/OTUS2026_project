@@ -2,11 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        booleanParam(
-            name: 'HEADLESS',
-            defaultValue: true,
-            description: 'Run UI tests in headless mode'
-        )
+        booleanParam(name: 'HEADLESS', defaultValue: true, description: 'Run UI tests in headless mode')
     }
 
     environment {
@@ -62,12 +58,16 @@ pipeline {
         always {
             junit allowEmptyResults: true, testResults: 'junit.xml'
             archiveArtifacts artifacts: 'allure-results/**', allowEmptyArchive: true
-            allure([
-                includeProperties: false,
-                jdk: '',
-                results: [[path: 'allure-results']],
-                commandline: 'allure'
-            ])
+            allure includeProperties: false,
+                   jdk: '',
+                   results: [[path: 'allure-results']],
+                   commandline: 'allure'
+        }
+        success {
+            echo 'Сборка успешна!'
+        }
+        failure {
+            echo '!!!!!! Сборка провалена !!!!!!'
         }
     }
 }
