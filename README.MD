@@ -1,5 +1,6 @@
 # Project for OTUS 2026 UI/API Autotests
 
+
 Тестируемые сервисы:
 
 - **UI**: [SauceDemo](https://www.saucedemo.com/)
